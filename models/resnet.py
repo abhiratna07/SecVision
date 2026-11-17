@@ -5,7 +5,7 @@ import config
 
 CIFAR_MEAN=(0.4914,0.4822,0.4465)
 CIFAR_STD=(0.2023,0.1994,0.2010)
-class CIFAR10ResNet18(nn.module):
+class CIFAR10ResNet18(nn.Module):
     def __init__(self):
         super().__init__()
         self.register_buffer("mean",torch.tensor(CIFAR_MEAN).view(1,3,1,1))
