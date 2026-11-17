@@ -6,14 +6,14 @@ import config
 
 CLIP_MEAN=(0.48145466,0.4578275,0.40821073)
 CLIP_STD=(0.26862953,0.26130258,0.27577711)
-class CLIP(nn.module):
+class CLIP(nn.Module):
     def __init__(self, class_names):
         super().__init__()
         self.model,_,_=open_clip.create_model_and_transforms(
             config.CLIP_MODEL,pretrained=config.CLIP_PRETRAINED
         )
         self.model.eval()
-        tokenizer=open_clip.get_tokenizer(config.CLIP_MODEL_NAME)
+        tokenizer=open_clip.get_tokenizer(config.CLIP_MODEL)
         self.register_buffer("mean",torch.tensor(CLIP_MEAN).view(1,3,1,1))
         self.register_buffer("std",torch.tensor(CLIP_STD).view(1,3,1,1))
         prompts=tokenizer([f"a photo of a {c}" for c in class_names])

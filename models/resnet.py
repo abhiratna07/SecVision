@@ -13,7 +13,7 @@ class CIFAR10ResNet18(nn.Module):
         self.net=models.resnet18(weights=None)
         self.net.conv1=nn.Conv2d(3,64,kernel_size=3,stride=1,padding=1,bias=False)
         self.net.maxpool=nn.Identity()
-        self.net.fc=nn.Liner(self.net.fc.in_features, config.NUM_CLASSES)
+        self.net.fc=nn.Linear(self.net.fc.in_features, config.NUM_CLASSES)
 
     def forward(self, x):
         x=(x-self.mean)/self.std

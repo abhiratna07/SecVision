@@ -12,7 +12,7 @@ def cifar10_loaders():
     train_transform = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
-        transforms.toTensor(),
+        transforms.ToTensor(),
     ])
     test_transform=transforms.ToTensor()
     train_set=torchvision.datasets.CIFAR10(

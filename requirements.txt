@@ -1,6 +1,6 @@
 torchvision
-torch=>2.6.0
-open_clip_torch=>3.0.0
+torch>=2.6.0
+open_clip_torch>=3.0.0
 matplotlib
 tqdm
 numpy
