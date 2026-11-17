@@ -12,7 +12,7 @@ class PGD:
     def generate(self,images,labels):
         if self.epsilon==0.0:
             return images.detach().clone()
-        was_training=self.model_training
+        was_training=self.model.training
         self.model.eval()
         original_images=images.detach()
         if self.random_start:

@@ -6,6 +6,7 @@ from models.clip import CLIP
 from training.trainer import train_model,evaluate 
 
 def main():
+    os.makedirs(config.CHECKPOINT_DIR, exist_ok=True)
     train_loader,test_loader=cifar10_loaders()
     print("Results For Baseline ResNet")
     resnet=CIFAR10ResNet18()

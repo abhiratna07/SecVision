@@ -10,8 +10,8 @@ from attacks.pgd import PGD
 def run(model,name,test_loader):
     print(f"{name}")
     for eps in config.EPSILON_VALUE:
-        fgsm=FGSM(model, eps=eps)
-        pgd=PGD(model,eps=eps,alpha=config.ALPHA,steps=config.PGD_EVAL_STEPS)
+        fgsm=FGSM(model, epsilon=eps)
+        pgd=PGD(model,epsilon=eps,alpha=config.ALPHA,steps=config.PGD_EVAL_STEPS)
         fgsm_acc=evaluate(model,test_loader,attack=fgsm)
         pgd_acc=evaluate(model,test_loader,attack=pgd)
         print(f"eps={eps*255:4.0f}/255 | FGSM: {fgsm_acc:6.2f}% | PGD: {pgd_acc:6.2f}%")
