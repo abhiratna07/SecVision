@@ -1,3 +1,4 @@
+import os
 import torch
 import config
 from utils.data import cifar10_loaders,CIFAR10_CLASSES
@@ -18,10 +19,15 @@ def run(model,name,test_loader):
 
 def main():
     _,test_loader=cifar10_loaders()
-    resnet=CIFAR10ResNet18().to(config.DEVICE)
-    resnet.load_state_dict(torch.load(config.BASELINE_MODEL_PATH,map_location=config.DEVICE,weights_only=True))
+    if os.path.exists(config.BASELINE_MODEL_PATH):
+        resnet=CIFAR10ResNet18().to(config.DEVICE)
+        resnet.load_state_dict(torch.load(config.BASELINE_MODEL_PATH,map_location=config.DEVICE,weights_only=True))
+        run(resnet,"Baseline ResNet-18",test_loader)
+    if os.path.exists(config.ROBUST_MODEL_PATH):
+        final1=CIFAR10ResNet18().to(config.DEVICE)
+        final1.load_state_dict(torch.load(config.ROBUST_MODEL_PATH,map_location=config.DEVICE,weights_only=True))
+        run(final1,"Robust ResNet-18",test_loader)
     clip_model=CLIP(CIFAR10_CLASSES).to(config.DEVICE)
-    run(resnet,"Baseline ResNet-18",test_loader)
     run(clip_model,"CLIP",test_loader)
 
 if __name__=="__main__":
